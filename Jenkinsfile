@@ -6,6 +6,18 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/KONATE-ABDRAHAMANE/TP_Frontend_deployment_cda.git'
             }
         }
+        stage('controle qualité'){
+            steps {
+                sh '''
+                    sonar-scanner \
+                    -Dsonar.projectKey=konate_tp_font \
+                    -Dsonar.sources=. \
+                    -Dsonar.host.url=https://669b-212-114-26-208.ngrok-free.app \
+                    -Dsonar.token=sqp_4edf723cf674fcab30066e048f9ea04b50cc2211
+                '''
+            }
+
+        }
        stage('Déploiement du dépôt cloné via FTP') {
             steps {
                 sh '''
